@@ -1,67 +1,34 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Question;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    public function game()
-    {
-        $questions = \App\Models\Question::all();
+    public function game() {
+        $questions = Question::all();
         return view('game', compact('questions'));
-    }   
-
-    public function index()
-    {
+    }
+    public function index() {
         return view('admin.index', ['questions' => Question::latest()->get()]);
     }
-
-    public function create()
-    {
+    public function create() {
         return view('admin.create');
     }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'q' => 'required',
-            'a' => 'required',
-            'b' => 'required',
-            'ans' => 'required|in:1,2',
-            'ex' => 'required',
-        ]);
-
+    public function store(Request $request) {
         Question::create($request->all());
-
-        return redirect()->route('questions.index')->with('success', 'Question created successfully.');
+        return redirect()->route('admin.index');
     }
-
-    public function edit(Question $question)
-    {
-        return view('admin.edit', compact('question'));
+    public function edit(Question $question) {
+        return view('admin.create', compact('question')); // Pakai form yang sama
     }
-
-    public function update(Request $request, Question $question)
-    {
-        $request->validate([
-            'q' => 'required',
-            'a' => 'required',
-            'b' => 'required',
-            'ans' => 'required|in:1,2',
-            'ex' => 'required',
-        ]);
-
+    public function update(Request $request, Question $question) {
         $question->update($request->all());
-
-        return redirect()->route('questions.index')->with('success', 'Question updated successfully.');
+        return redirect()->route('admin.index');
     }
-
-    public function destroy(Question $question)
-    {
+    public function destroy(Question $question) {
         $question->delete();
-
-        return redirect()->route('questions.index')->with('success', 'Question deleted successfully.');
+        return redirect()->route('admin.index');
     }
 }
