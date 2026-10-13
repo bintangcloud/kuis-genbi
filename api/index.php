@@ -1,4 +1,3 @@
-
 <?php
 
 /*
@@ -12,7 +11,13 @@
 | serverless-safe defaults here, but only when the user has not set
 | the corresponding env var in the Vercel dashboard.
 |
+| NOTE: this file must start with <?php on the very first byte (no blank
+| line, no BOM). Any stray output before headers makes Vercel serve the
+| response as a download instead of rendering it.
+|
 */
+
+ini_set('display_errors', '0');
 
 foreach ([
     'VIEW_COMPILED_PATH' => '/tmp/views',
