@@ -8,6 +8,10 @@
   "outputDirectory": "public",
   "routes": [
     {
+      "src": "/index.php",
+      "dest": "/api/index.php"
+    },
+    {
       "handle": "filesystem"
     },
     {
