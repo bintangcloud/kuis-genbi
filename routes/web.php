@@ -1,20 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QuestionController;
 
-// Halaman Game Utama (Publik)
-Route::get('/', [QuestionController::class, 'game'])->name('game');
-
-// Halaman Admin CRUD (Dilindungi Breeze)
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [QuestionController::class, 'index'])->name('index');
-    Route::get('/create', [QuestionController::class, 'create'])->name('create');
-    Route::post('/store', [QuestionController::class, 'store'])->name('store');
-    Route::get('/{question}/edit', [QuestionController::class, 'edit'])->name('edit');
-    Route::put('/{question}', [QuestionController::class, 'update'])->name('update');
-    Route::delete('/{question}', [QuestionController::class, 'destroy'])->name('destroy');
+// Backend API only — frontend terpisah (lihat folder frontend/).
+// Dokumentasi endpoint: GET /api/questions (publik), POST /api/login (admin).
+Route::get('/', function () {
+    return response()->json([
+        'app' => config('app.name'),
+        'mode' => 'api-only',
+        'health' => '/up',
+        'endpoints' => [
+            'GET /api/questions',
+            'GET /api/questions/{id}',
+            'POST /api/login',
+            'GET /api/me (token)',
+            'POST /api/logout (token)',
+            'POST /api/questions (token)',
+            'PUT /api/questions/{id} (token)',
+            'DELETE /api/questions/{id} (token)',
+        ],
+    ]);
 });
-
-// File Route bawaan Breeze (WAJIB ADA)
-require __DIR__.'/auth.php';
