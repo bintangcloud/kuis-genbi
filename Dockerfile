@@ -1,16 +1,6 @@
 
-# Tahap 1: Build aset frontend
-FROM node:22-alpine AS frontend
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm ci
-
-COPY . .
-RUN npm run build
-
-# Tahap 2: Jalankan Laravel
+# Backend API-only: tidak butuh build aset Vite (frontend deploy terpisah),
+# jadi langsung ke image PHP agar build Railway lebih cepat.
 FROM php:8.4-cli
 
 RUN apt-get update && apt-get install -y \
@@ -31,8 +21,6 @@ RUN composer install \
     --no-dev \
     --optimize-autoloader \
     --no-interaction
-
-COPY --from=frontend /app/public/build ./public/build
 
 RUN mkdir -p \
     storage/framework/cache \

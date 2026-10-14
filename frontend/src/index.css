@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --font-kids: "Baloo 2", system-ui, sans-serif;
+  --color-daun: #174c36;
+  --color-daun2: #246b49;
+  --color-mint: #e5f4e9;
+  --color-kuning: #ffd66b;
+  --color-tinta: #203329;
+}
+
+body {
+  font-family: var(--font-kids);
+}
+
+/* Balon & bintang melayang */
+@keyframes drift {
+  0% { transform: translateY(105vh) rotate(-8deg); opacity: 0; }
+  8% { opacity: 0.9; }
+  92% { opacity: 0.9; }
+  100% { transform: translateY(-15vh) rotate(8deg); opacity: 0; }
+}
+.animate-drift {
+  animation: drift linear infinite;
+  will-change: transform;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+.animate-wiggle { animation: wiggle 2.4s ease-in-out infinite; }
+
+@keyframes pop-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop-in { animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+
+@keyframes fx-float {
+  0% { opacity: 0; transform: scale(0.3) translateY(50px); }
+  15% { opacity: 1; transform: scale(1.2) translateY(-10px); }
+  80% { opacity: 1; transform: scale(1) translateY(-60px); }
+  100% { opacity: 0; transform: scale(1) translateY(-100px); }
+}
+.animate-fx-float { animation: fx-float 2.5s ease-out both; }
+
+/* Video/canvas mirror */
+.mirror {
+  transform: scaleX(-1);
+}
