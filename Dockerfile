@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql pdo_pgsql intl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Gagalkan build kalau driver MySQL tidak terinstall (biar ketahuan di Build Logs)
+RUN php -m | grep -i pdo_mysql
+
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
