@@ -362,8 +362,8 @@ export default function Game() {
             <span className="inline-block rounded-full border border-green-200 bg-white px-4 py-1 text-sm font-extrabold text-daun shadow">
               Soal {idx + 1} / {questions.length} 📝
             </span>
-            <h2 className="mt-2 text-2xl font-black text-daun sm:text-3xl">{q.q}</h2>
-            <div className="mx-auto mt-2 h-3 max-w-md overflow-hidden rounded-full bg-stone-200">
+            <h2 className="mt-1 text-xl font-black text-daun sm:text-2xl">{q.q}</h2>
+            <div className="mx-auto mt-1 h-2.5 max-w-md overflow-hidden rounded-full bg-stone-200">
               <div
                 className="h-full rounded-full transition-all duration-1000"
                 style={{
@@ -388,8 +388,11 @@ export default function Game() {
             )}
           </div>
 
-          {/* Kamera BESAR */}
-          <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-[2rem] border-[6px] border-white bg-black shadow-2xl">
+          {/* Kamera: tinggi dibatasi agar soal + kamera muat 100% tanpa scroll */}
+          <div
+            className="relative mx-auto w-full overflow-hidden rounded-[2rem] border-[6px] border-white bg-black shadow-2xl"
+            style={{ height: 'min(44vh, 440px)', minHeight: '250px' }}
+          >
             <div className="pointer-events-none absolute left-1/2 top-3 z-10 -translate-x-1/2 rounded-full border border-white/30 bg-daun/85 px-4 py-1 text-xs font-extrabold text-white shadow sm:text-sm">
               ✨ Arahkan Jari Telunjukmu ke Opsi A / B ✨
             </div>
