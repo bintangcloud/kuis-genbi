@@ -388,11 +388,8 @@ export default function Game() {
             )}
           </div>
 
-          {/* Kamera: tinggi dibatasi agar soal + kamera muat 100% tanpa scroll */}
-          <div
-            className="relative mx-auto w-full overflow-hidden rounded-[2rem] border-[6px] border-white bg-black shadow-2xl"
-            style={{ height: 'min(44vh, 440px)', minHeight: '250px' }}
-          >
+          {/* Kamera 16:9 full-width — halaman bisa di-scroll */}
+          <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-[2rem] border-[6px] border-white bg-black shadow-2xl">
             <div className="pointer-events-none absolute left-1/2 top-3 z-10 -translate-x-1/2 rounded-full border border-white/30 bg-daun/85 px-4 py-1 text-xs font-extrabold text-white shadow sm:text-sm">
               ✨ Arahkan Jari Telunjukmu ke Opsi A / B ✨
             </div>
